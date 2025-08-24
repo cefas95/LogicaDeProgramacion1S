@@ -1,42 +1,44 @@
 import random
 import string
 
-# Bucle while para validar el mínimo de caracteres
-while True:
-    try:
-        longitud = int(input("Ingrese el número de caracteres para la contraseña (mínimo 5): "))
-        if longitud < 5:
-            print("⚠ La contraseña debe tener al menos 5 caracteres.")
-        else:
-            break
-    except ValueError:
-        print("⚠ Ingrese un número válido.")
+#definimos los caracteres de la libreria string
 
-# Caracteres disponibles
-mayusculas = string.ascii_uppercase
-minusculas = string.ascii_lowercase
+letras = string.ascii_letters
 numeros = string.digits
 simbolos = string.punctuation
 
-# Unir todos los caracteres
-todos = mayusculas + minusculas + numeros + simbolos
+#definimos la funcion 
 
-# Generar contraseña usando for e if
-contrasena_lista = []
-for i in range(longitud):
-    if i % 4 == 0:
-        contrasena_lista.append(random.choice(mayusculas))
-    elif i % 4 == 1:
-        contrasena_lista.append(random.choice(minusculas))
-    elif i % 4 == 2:
-        contrasena_lista.append(random.choice(numeros))
-    else:
-        contrasena_lista.append(random.choice(simbolos))
+def contrasena_segura(longitud):
+    caracteres = letras + numeros+ simbolos
+    contrasena =""
+    for i in range(longitud):
+        contrasena += random.choice(caracteres)
 
-# Mezclar los caracteres para evitar patrón
-random.shuffle(contrasena_lista)
+    return contrasena
 
-# Convertir lista en string
-contrasena = "".join(contrasena_lista)
+nombre = input("ingrese su nombre: ")
 
-print(f"🔐 Su contraseña generada es: {contrasena}")
+# Bucle while para validar el mínimo de caracteres
+while True:
+    try:
+        #pedimos al usuario determinar la longitud de caracteres de su contraseña y generamos la contraseña 
+        longitud = int(input("Ingrese el número de caracteres para la contraseña (mínimo 5 y maximo 16 ): "))
+        if longitud < 5 :
+            print("La contraseña debe tener al menos 5 caracteres.")
+        elif longitud > 16:
+            print("la contraseña debe tener un maximo 16 digitos")
+        else:
+            break
+    except ValueError:
+        print(" Ingrese un número válido.")
+
+pasword = contrasena_segura(longitud)
+
+print("Hola",nombre, "su contraseña es:" , pasword)
+
+
+
+
+
+
